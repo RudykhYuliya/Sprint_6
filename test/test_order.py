@@ -3,7 +3,6 @@ import pytest
 
 from data import ORDER_1, ORDER_2
 from pages.main_page import MainPage
-from pages.order_page import OrderPage
 
 
 @allure.feature('Заказ самоката')
@@ -17,9 +16,8 @@ class TestOrder:
         ],
         ids=['header', 'footer'],
     )
-    def test_successful_order(self, main_page, open_order, order):
+    def test_successful_order(self, main_page, order_page, open_order, order):
         open_order(main_page)
-        order_page = OrderPage(main_page.driver)
         order_page.create_order(order)
         assert 'Заказ оформлен' in order_page.success_title()
 
